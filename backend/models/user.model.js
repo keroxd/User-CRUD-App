@@ -1,29 +1,33 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    id:{
-        type: Number,
-        required: true
-    },
-    name:{
+    name: {
         type: String,
         required: true
     },
-    profession:{
+    dob: {
+        type: Date,
+        required: false,
+        validate: {
+            validator: function (value) {
+                return value <= new Date();
+            },
+            message: 'Birth date cannot be in the future.'
+        }
+    },
+    email: {
         type: String,
         required: true
     },
     image: {
         type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
+        required: false,
+        default: "https://example.com/default-avatar.png"
     }
 }, {
-    timestamps:true
 })
+
+
 
 const User = mongoose.model('User', userSchema);
 export default User;

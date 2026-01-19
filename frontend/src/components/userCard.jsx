@@ -1,13 +1,19 @@
+import { FaEdit } from "react-icons/fa";
 
+const userCard = ({ name, email, image }) => {
 
-const userCard = ({name, profession, image}) => {
-    
-    return(<>
-    <div className="bg-white w-auto h-80 border-1  border-neutral-300 rounded-lg text-start cursor-pointer hover:shadow-lg hover:scale-102 transition-all duration-200">
-        <img src={image} className="w-auto h-60 mb-3 rounded-t-lg object-cover bg-pink-200"/>
-        <p className="mx-5 mt-4 font-semibold">Name : {name}</p>
-        <p className="text-neutral-500 mx-5 text-xs">{profession}</p>
-    </div>
+    return (<>
+        <div className="bg-white flex items-center w-auto h-auto p-3 border-1  border-neutral-300 rounded-lg text-start cursor-pointer hover:shadow-md hover:scale-102 transition-all duration-200">
+            <img src={image} className="w-20 min-h-20 object-cover rounded-full bg-pink-200" />
+            <div className="bg-transparent min-w-45 pr-5 pl-5">
+                <p className="font-semibold">{name}</p>
+                <p className="text-neutral-500 text-xs">{email}</p>
+            </div>
+            <div className="bg-transparent h-20 w-12 flex justify-end items-baseline">
+                <FaEdit size={20} className="text-neutral-500"/>
+            </div>
+
+        </div>
     </>
     )
 }

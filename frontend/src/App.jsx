@@ -2,10 +2,13 @@ import { useState } from 'react'
 import axios from 'axios'
 import UserCard from './components/userCard'
 import { useEffect } from 'react'
+import AddCard from './components/addCard'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
   const [data, setData] = useState([])
+  const [isAddCardOpen, setIsAddCardOpen] = useState(false)
 
   const getUsers = () => {
     axios.get("http://localhost:5000/api/users")
@@ -22,15 +25,26 @@ function App() {
 
   return (
     <>
-      <div className='bg-neutral-50 pt-10 flex justify-center w-full h-auto'>
-        <div className='bg-transparent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-2 gap-2 w-80 sm:w-150 md:w-200 sm:h-162'>
-          {data.map((user) => (
-            <UserCard key={user.id} name={user.name} profession={user.profession} image={user.image}></UserCard>
+      <div className='bg-neutral-50 p-2 flex justify-center h-[100vh] '>
+
+        {isAddCardOpen && (
+          <div className='bg-black/80 fixed inset-0 z-[999] flex items-center justify-center'>
+            <AddCard close={() => setIsAddCardOpen(false)}></AddCard>
+          </div>
+        )}
+
+        <section className=''>
+          <div className='bg-transparent py-2 flex justify-end w-85 sm:w-170 lg:w-250 h-15'>
+            <button className='bg-purple-200 text-purple-800 hover:brightness-90 w-22 h-10 text-xs font-semibold rounded-md cursor-pointer
+            transition-all duration-150' onClick={() => setIsAddCardOpen(true)}>+ Add User</button>
+          </div>
+          <div className='bg-transparent grid sm:grid-cols-2 lg:grid-cols-3 gap-2 w-85 sm:w-170 lg:w-250'>
+            {data.map((user) => (
+            <UserCard key={user._id} name={user.name} email={user.email} image={user.image}></UserCard>
           ))}
-        </div>
 
-
-
+          </div>
+        </section>
       </div>
 
     </>
