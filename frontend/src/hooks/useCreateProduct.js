@@ -17,6 +17,7 @@ const useCreateProduct = () => {
 
         try{
             await axios.post("http://localhost:5000/api/products", productData)
+            alert("New Product Added")
             window.location.reload()
             return true;
         } catch (err) {

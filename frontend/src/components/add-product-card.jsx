@@ -24,7 +24,10 @@ const AddProductCard = ({ close, image }) => {
 
     const addNewProduct = async (e) => {
         e.preventDefault();
-        await createProduct(newProduct)
+        const success = await createProduct(newProduct)
+        if(success) {
+            close()
+        }
     }
 
 
@@ -40,7 +43,7 @@ const AddProductCard = ({ close, image }) => {
 
                 <section className="w-auto flex mt-3 p-4">
                     <img
-                        className="min-w-64 h-84 object-cover rounded-lg"
+                        className="min-w-64 h-84 object-top object-cover rounded-lg"
                         src={newProduct.image || "https://i.pinimg.com/1200x/dc/50/d8/dc50d8d419a5a130fdef52b02152cc62.jpg"}
                         alt="Product Preview"
                     />
